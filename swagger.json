@@ -1,0 +1,475 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "nodejs_layout",
+        "description": "nodejs_layout"
+    },
+    "schemes": [
+        "http"
+    ],
+    "host": "localhost:4000/api",
+    "basePath": "",
+    "paths": {
+
+        "/auth/sign-up": {
+            "post": {
+                "summary": "sign-up",
+                "description": "Ruta para sign up",
+                "parameters":                            
+                [{
+                    "name": "user",
+                    "in": "body",
+                    "description": "Crear usuario",
+                    "properties": {
+                        "email": {
+                            "type": "string",
+                            "example": "alfredomujicagodoy@gmail.com"
+                        },
+                        "password": {
+                            "type": "string",
+                            "example": "123456"
+                        },
+                        "country_id": {
+                            "type": "string",
+                            "example": "5f68ca7d0b97c50252c3b4df"
+                        },
+                        "role_id": {
+                            "type": "string",
+                            "example": "5f68ca7e0b97c50252c3c443"
+                        }
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Login",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "ok": {
+                                    "type": "boolean",
+                                    "example": true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+        "/auth/log-in": {
+            "post": {
+                "summary": "Login",
+                "description": "Ruta para Login",
+                "parameters":                            
+                [{
+                    "name": "user",
+                    "in": "body",
+                    "description": "Login de usuario",
+                    "properties": {
+                        "email": {
+                            "type": "string",
+                            "example": "test@gmail.com"
+                        },
+                        "password": {
+                            "type": "string",
+                            "example": "test@gmail.com"
+                        }
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Login",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "ok": {
+                                    "type": "boolean",
+                                    "example": true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+        "/auth/log-out": {
+            "post": {
+                "summary": "Logout",
+                "description": "Ruta para Logout",
+                "responses": {
+                    "200": {
+                        "description": "Logout",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "ok": {
+                                    "type": "boolean",
+                                    "example": true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+        "/auth": {
+            "post": {
+                "summary": "Login",
+                "description": "Ruta para Login",
+                "parameters":                            
+                [{
+                    "name": "user",
+                    "in": "body",
+                    "description": "Login de usuario",
+                    "properties": {
+                        "email": {
+                            "type": "string",
+                            "example": "test@gmail.com"
+                        },
+                        "password": {
+                            "type": "string",
+                            "example": "test@gmail.com"
+                        }
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Login",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "ok": {
+                                    "type": "boolean",
+                                    "example": true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+        "/users/get-users": {
+            "get": {
+                "summary": "Users",
+                "description": "Ruta que permite obtener todos usuarios",
+                "responses": {
+                    "200": {
+                        "description": "Lista de usuarios",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "ok": {
+                                    "type": "boolean",
+                                    "example": true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+        "/proyectos": {
+            "post": {
+                "summary": "Login",
+                "description": "Ruta para Login",
+                "parameters":                            
+                [{
+                    "name": "user",
+                    "in": "body",
+                    "description": "Login de usuario",
+                    "properties": {
+                        "nombre": {
+                            "type": "string",
+                            "example": "la tuya"
+                        }
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Login",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "ok": {
+                                    "type": "boolean",
+                                    "example": true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+    
+        "definitions": {
+            "User": {
+                "required": [
+                    "full_name",
+                    "country",
+                    "email",
+                    "password",
+                    "user_type",
+                    "role"
+                ],
+                "properties": {
+                    "full_name": {
+                        "type": "string"
+                    },
+                    "country": {
+                        "$ref": "#/definitions/Country"
+                    },
+                    "email": {
+                        "type": "string",
+                        "unique": true
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "user_type": {
+                        "type": "string",
+                        "enum": ["Individual", "Organization"]
+                    },
+                    "contact_name": {
+                        "type": "string"
+                    },
+                    "role": {
+                        "type": "string",
+                        "enum": ["Investor", "Founder"]
+                    },
+                    "avatar":{
+                        "type": "string"
+                    },
+                    "verified": {
+                        "type": "boolean",
+                        "default": false
+                    }
+                }
+            },
+            "Profile": {
+                "required": [
+                    "user_id"
+                ],
+                "properties": {
+                    "prefered_name": {
+                        "type": "string"
+                    },
+                    "personal_introduction": {
+                        "type": "string"
+                    },
+                    "sector_interest": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "contact_me": { 
+                        "type": "array",
+                        "items": {
+                            "type": "boolean"
+                        }
+                    },
+                    "claims_fame": {
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "description": {
+                                    "type": "string"
+                                },
+                                "tags":{
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "raiting": {
+                        "type": "number",
+                        "default": 0
+                    },
+                    "raiting_founders": {
+                        "type": "number",
+                        "default": 0
+                    },
+                    "raiting_investors": {
+                        "type": "number",
+                        "default": 0
+                    },
+                    "followers": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "followings": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "short_list": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/Project"
+                        }
+                    },
+                    "average": {
+                        "type": "number",
+                        "default": 0
+                    },
+                    "projects_active": {
+                        "type": "number",
+                        "default": 0
+                    },
+                    "projects_wanted": {
+                        "type": "number",
+                        "default": 0
+                    },
+                    "completed_exits": {
+                        "type": "number",
+                        "default": 0
+                    },
+                    "account_verified": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "user_id": {
+                        "$ref": "#/definitions/User"
+                    }
+                }
+            },
+            "Country": {
+                "required": [
+                    "continent_code",
+                    "continent_name",
+                    "country_code",
+                    "country_name"
+                ],
+                "properties": {
+                    "continent_code":{
+                        "type": "string"
+                    },
+                    "continent_name":{
+                        "type": "string"
+                    },
+                    "country_code":{
+                        "type": "string"
+                    },
+                    "country_name":{
+                        "type": "string"
+                    }
+                }
+            },
+            "Project": {
+                "required": [
+                    "name",
+                    "url_video",
+                    "url_website",
+                    "campaign_start",
+                    "campaign_end",
+                    "location",
+                    "market_sector",
+                    "budget",
+                    "needed",
+                    "current_anual_sales",
+                    "stage",
+                    "main_highlights",
+                    "concept",
+                    "full_pitch",
+                    "user_id"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "url_video": {
+                        "type": "string"
+                    },
+                    "url_website": {
+                        "type": "string"
+                    },
+                    "campaign_start": {
+                        "type": "string"
+                    },
+                    "campaign_end": {
+                        "type": "string"
+                    },
+                    "location": {
+                        "$ref": "#/definitions/Country"
+                    },
+                    "market_sector": {
+                        "type": "string",
+                        "enum": ["AgTech", "FinTech", "Telecomms"]
+                    },
+                    "budget": {
+                        "type": "number"
+                    },
+                    "needed": {
+                        "type": "number"
+                    },
+                    "funds_raised": {
+                        "type": "number",
+                        "default": 0
+                    },
+                    "current_anual_sales": {
+                        "type": "number",
+                        "default": 0
+                    },
+                    "valuation": {
+                        "type": "number",
+                        "default": 0
+                    },
+                    "equity_offered": {
+                        "type": "number",
+                        "default": 0
+                    },
+                    "stage": {
+                        "type": "string",
+                        "enum": ["Pre-Seed", "Seed Syndicate", "Round 1+", "Secondary Market"]
+                    },
+                    "token": {
+                        "type": "object",
+                        "properties": {
+                            "token":{
+                                "type": "string"
+                            },
+                            "token_type":{
+                                "type": "string",
+                                "enum": ["Utility", "Security"]
+                            }
+                        }
+                    },
+                    "main_highlights": {
+                        "type": "string"
+                    },
+                    "concept": {
+                        "type": "object",
+                        "properties": {
+                            "opportunity":{
+                                "type": "string"
+                            },
+                            "problem":{
+                                "type": "string"
+                            },
+                            "solution":{
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "full_pitch": {
+                        "type": "string"
+                    },
+                    "user_id": {
+                        "$ref": "#/definitions/User"
+                    }
+                }
+            }
+        }
+    }
+}
