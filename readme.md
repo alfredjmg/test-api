@@ -2,7 +2,7 @@ Test Project
 
 For start project use:
 
-npm run dev
+npm start
 
 For testing use:
 
